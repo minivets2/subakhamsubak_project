@@ -8,27 +8,29 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Transform breadCreatePosition;
     
     [Header("Prefab")]
-    [SerializeField] private List<GameObject> breads;
+    [SerializeField] private GameObject breadPrefab;
 
     private GameObject _bread;
     private bool _isDragging;
     private bool _canControl;
     
-    public List<GameObject> Breads => breads;
+    public GameObject BreadPrefab => breadPrefab;
 
     private void OnEnable()
     {
         Bread.dropEvent += CanControl;
+        Bread.mergeEvent += MergeBread;
     }
 
     private void OnDisable()
     {
         Bread.dropEvent -= CanControl;
+        Bread.mergeEvent -= MergeBread;
     }
 
     private void Start()
     {
-        StartCoroutine(NewBread(BreadType.Bread3, Vector3.zero, 0f));
+        StartCoroutine(NewBread(1, Vector3.zero, 0f));
         _canControl = true;
     }
 
@@ -46,7 +48,7 @@ public class GameManager : Singleton<GameManager>
             _isDragging = false;
             _bread.GetComponent<Bread>().DropBread();
             _bread = null;
-            StartCoroutine(NewBread(BreadType.Bread3, Vector3.zero, 1f));
+            StartCoroutine(NewBread(2, Vector3.zero, 0.5f));
         }
 
         if (_isDragging)
@@ -60,21 +62,21 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    IEnumerator NewBread(BreadType breadType, Vector3 position, float creatTime)
+    IEnumerator NewBread(int level, Vector3 position, float creatTime)
     {
         yield return new WaitForSeconds(creatTime);
         
-        var bread = Instantiate(this.breads[(int)breadType], breadCreatePosition);
+        var bread = Instantiate(breadPrefab, breadCreatePosition);
         bread.transform.position = new Vector3(position.x, breadCreateYPosition, position.z);
+        bread.gameObject.GetComponent<Bread>().SetLevel(level);
         _bread = bread;
 
         yield return null;
     }
 
-    public void MergeBread(BreadType breadType, Vector3 position)
+    public void MergeBread(GameObject gameObject)
     {
-        var bread = Instantiate(this.breads[(int)breadType], breadCreatePosition);
-        bread.transform.position = position;
+        Destroy(gameObject);
     }
 
     private void CanControl()

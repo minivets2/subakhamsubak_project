@@ -571,10 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breadCreateYPosition: 3
   breadCreatePosition: {fileID: 990919620}
-  breads:
-  - {fileID: 6601243784820686101, guid: 2fc0a39e009ab0049baea14062318e96, type: 3}
-  - {fileID: 651438608711348209, guid: b30d3050e35917f4c95f4be40db520b0, type: 3}
-  - {fileID: 651438608711348209, guid: 4ffd971249d05084784d26fff426e0bf, type: 3}
+  breadPrefab: {fileID: 6601243784820686101, guid: 2fc0a39e009ab0049baea14062318e96, type: 3}
 --- !u!4 &1448122419
 Transform:
   m_ObjectHideFlags: 0
