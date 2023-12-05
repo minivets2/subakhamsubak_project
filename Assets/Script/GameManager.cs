@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("UI")]
+    [SerializeField] private UIManager uiManager;
+    
+    [Header("Init")]
     [SerializeField] private float breadCreateYPosition;
     [SerializeField] private Transform breadCreatePosition;
     
@@ -14,6 +18,7 @@ public class GameManager : Singleton<GameManager>
     private int _maxLevel;
     private bool _isDragging;
     private bool _canControl;
+    private int _gameScore;
     
     public GameObject BreadPrefab => breadPrefab;
     public int MaxLevel => _maxLevel;
@@ -35,6 +40,9 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(NewBread(1, Vector3.zero, 0f));
         _canControl = true;
         _maxLevel = 0;
+        
+        _gameScore = 0;
+        uiManager.SetGameScore(_gameScore);
     }
 
     void Update()
@@ -80,7 +88,11 @@ public class GameManager : Singleton<GameManager>
 
     public void LevelUp(int level)
     {
-        _maxLevel = level;
+        if (level < 6 && _maxLevel < 5)
+            _maxLevel = level;
+
+        _gameScore += level * 4;
+        uiManager.SetGameScore(_gameScore);
     }
 
     private void CanControl()

@@ -109,10 +109,9 @@ public class Bread : MonoBehaviour
         _animator.Play(stateName, -1, 0f);
 
         yield return new WaitForSeconds(0.3f);
+        
         level++;
-
-        if (level < 6 && GameManager.Instance.MaxLevel < 5)
-            levelUpEvent?.Invoke(level);
+        levelUpEvent?.Invoke(level);
 
         _isMerge = false;
     }
