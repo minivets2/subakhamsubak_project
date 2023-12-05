@@ -19,8 +19,8 @@ public class Bread : MonoBehaviour
     public delegate void DropEvent();
     public static DropEvent dropEvent;
     
-    public delegate void MergeEvent(GameObject gameObject);
-    public static MergeEvent mergeEvent;
+    public delegate void LevelUpEvent(int level);
+    public static LevelUpEvent levelUpEvent;
 
     private void Awake()
     {
@@ -110,6 +110,9 @@ public class Bread : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         level++;
+
+        if (level < 6 && GameManager.Instance.MaxLevel < 5)
+            levelUpEvent?.Invoke(level);
 
         _isMerge = false;
     }
