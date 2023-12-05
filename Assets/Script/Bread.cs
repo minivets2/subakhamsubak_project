@@ -102,8 +102,6 @@ public class Bread : MonoBehaviour
 
     IEnumerator LevelUpRoutine()
     {
-        yield return new WaitForSeconds(0.2f);
-
         int nextLevel = level + 1;
         string stateName = "Level" + nextLevel;
         _animator.Play(stateName, -1, 0f);
