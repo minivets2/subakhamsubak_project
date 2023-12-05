@@ -13,7 +13,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayMusic(string name)
     {
-        Sound s = Array.Find(musicSounds, x => x.name == name);
+        Sound s = Array.Find(musicSounds, x => x.Name == name);
 
         if (s == null)
         {
@@ -21,14 +21,14 @@ public class AudioManager : Singleton<AudioManager>
         }
         else
         {
-            musicSource.clip = s.clip;
+            musicSource.clip = s.Clip;
             musicSource.Play();
         }
     }
 
     public void PlaySFX(string name)
     {
-        Sound s = Array.Find(sfxSounds, x => x.name == name);
+        Sound s = Array.Find(sfxSounds, x => x.Name == name);
 
         if (s == null)
         {
@@ -36,7 +36,7 @@ public class AudioManager : Singleton<AudioManager>
         }
         else
         {
-            sfxSource.PlayOneShot(s.clip);
+            sfxSource.PlayOneShot(s.Clip);
         }
     }
 }

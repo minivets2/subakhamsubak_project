@@ -96,7 +96,7 @@ public class Bread : MonoBehaviour
         _isMerge = true;
         _rigidbody2D.velocity = Vector2.zero;
         _rigidbody2D.angularVelocity = 0;
-
+  
         StartCoroutine(LevelUpRoutine());
     }
 

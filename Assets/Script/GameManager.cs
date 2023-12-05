@@ -78,6 +78,7 @@ public class GameManager : Singleton<GameManager>
     {
         yield return new WaitForSeconds(creatTime);
         
+        AudioManager.Instance.PlaySFX("Click");
         var bread = Instantiate(breadPrefab, breadCreatePosition);
         bread.transform.position = new Vector3(position.x, breadCreateYPosition, position.z);
         bread.gameObject.GetComponent<Bread>().SetLevel(level);
