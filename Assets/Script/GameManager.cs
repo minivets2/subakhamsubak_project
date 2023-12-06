@@ -74,7 +74,8 @@ public class GameManager : Singleton<GameManager>
             Input.mousePosition.y, -Camera.main.transform.position.z));
             
         float breadRadius = _bread.GetComponent<CircleCollider2D>().radius;
-        if (Input.mousePosition.x - breadRadius > Screen.width / 2 - 482 && Input.mousePosition.x + breadRadius < Screen.width / 2 + 482)
+        
+        if (Input.mousePosition.x - breadRadius > 58 && Input.mousePosition.x + breadRadius < Screen.width - 58)
             _bread.transform.position = new Vector3(point.x, breadCreateYPosition, point.z);
     }
 
