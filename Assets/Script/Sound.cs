@@ -1,8 +1,17 @@
 using UnityEngine;
 
+public enum SoundName
+{
+    Theme,
+    Create,
+    Merge,
+    Drop,
+    Click,
+}
+
 [System.Serializable]
 public class Sound
 {
-    public string Name;
+    public SoundName Name;
     public AudioClip Clip;
 }

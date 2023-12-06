@@ -8,10 +8,10 @@ public class AudioManager : Singleton<AudioManager>
 
     private void Start()
     {
-        PlayMusic("Theme");
+        PlayMusic(SoundName.Theme);
     }
 
-    public void PlayMusic(string name)
+    public void PlayMusic(SoundName name)
     {
         Sound s = Array.Find(musicSounds, x => x.Name == name);
 
@@ -26,7 +26,7 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public void PlaySFX(string name)
+    public void PlaySFX(SoundName name)
     {
         Sound s = Array.Find(sfxSounds, x => x.Name == name);
 

@@ -47,10 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSounds:
-  - Name: Theme
+  - Name: 0
     Clip: {fileID: 8300000, guid: d86092625c2f57e45868179326d1233d, type: 3}
   sfxSounds:
-  - Name: Click
+  - Name: 1
     Clip: {fileID: 8300000, guid: fe0f13b2be0b6354894dddf98b68f746, type: 3}
   musicSource: {fileID: 4160990470305775923}
   sfxSource: {fileID: 4160990470248169983}
