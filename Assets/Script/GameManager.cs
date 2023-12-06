@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -18,6 +19,7 @@ public class GameManager : Singleton<GameManager>
     private int _maxLevel;
     private bool _isDragging;
     private int _gameScore;
+    private List<GameObject> _destroyBreads = new List<GameObject>();
     
     public GameObject BreadPrefab => breadPrefab;
     public int MaxLevel => _maxLevel;
@@ -25,13 +27,13 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         Bread.levelUpEvent += LevelUp;
-        Bread.gameOverEvent += GameOver;
+        Bread.gameOverEvent += GetAllBread;
     }
 
     private void OnDisable()
     {
         Bread.levelUpEvent -= LevelUp;
-        Bread.gameOverEvent -= GameOver;
+        Bread.gameOverEvent -= GetAllBread;
     }
 
     private void Start()
@@ -101,8 +103,27 @@ public class GameManager : Singleton<GameManager>
         uiManager.SetGameScore(_gameScore);
     }
 
-    private void GameOver()
+    private void GetAllBread()
     {
-        Debug.Log("게임오버!");
+        for (int i = 0; i < breadCreatePosition.childCount; i++)
+        {
+            if (breadCreatePosition.GetChild(i).gameObject.activeSelf)
+                _destroyBreads.Add(breadCreatePosition.GetChild(i).gameObject);
+        }
+
+        _destroyBreads.OrderBy(x => x.transform.position.y);
+
+        StartCoroutine(nameof(DestroyBread));
     }
+
+    IEnumerator DestroyBread()
+    {
+        for (int i = 0; i < _destroyBreads.Count; i++)
+        {
+            Destroy(_destroyBreads[i]);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    
+    
 }

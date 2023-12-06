@@ -58,7 +58,7 @@ public class Bread : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (!_isDrop)
+        if (!_isDrop && (col.gameObject.CompareTag($"Floor") || col.gameObject.CompareTag("Bread")))
         {
             _isDrop = true;
         }
