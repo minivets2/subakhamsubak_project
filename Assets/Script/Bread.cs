@@ -97,7 +97,7 @@ public class Bread : MonoBehaviour
     {
         int frameCount = 0;
 
-        while (frameCount < 20)
+        while (frameCount < 10)
         {
             frameCount++;
             transform.position = Vector3.Lerp(transform.position, targetPos, 0.5f);
@@ -133,7 +133,7 @@ public class Bread : MonoBehaviour
 
     public void DropBread()
     {
-        _rigidbody2D.gravityScale = 1.7f;
+        _rigidbody2D.gravityScale = 2f;
     }
 
     public void Explode(bool value)
