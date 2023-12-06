@@ -31,7 +31,6 @@ public class Bread : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _circleCollider2D = GetComponent<CircleCollider2D>();
-        _rigidbody2D.bodyType = RigidbodyType2D.Static;
         _animator = GetComponent<Animator>();
     }
 
@@ -134,7 +133,7 @@ public class Bread : MonoBehaviour
 
     public void DropBread()
     {
-        _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+        _rigidbody2D.gravityScale = 1.7f;
     }
 
     public void Explode(bool value)
