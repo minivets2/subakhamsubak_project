@@ -17,7 +17,6 @@ public class GameManager : Singleton<GameManager>
     private GameObject _bread;
     private int _maxLevel;
     private bool _isDragging;
-    private bool _canControl;
     private int _gameScore;
     
     public GameObject BreadPrefab => breadPrefab;
@@ -25,36 +24,34 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
-        Bread.dropEvent += CanControl;
         Bread.levelUpEvent += LevelUp;
+        Bread.gameOverEvent += GameOver;
     }
 
     private void OnDisable()
     {
-        Bread.dropEvent -= CanControl;
         Bread.levelUpEvent -= LevelUp;
+        Bread.gameOverEvent -= GameOver;
     }
 
     private void Start()
     {
         StartCoroutine(NewBread(1, Vector3.zero, 0f));
-        _canControl = true;
         _maxLevel = 0;
-        
         _gameScore = 0;
-        uiManager.SetGameScore(_gameScore);
     }
 
     void Update()
     {
-        if (!_canControl || _bread == null) return;
+        if (_bread == null) return;
 
         if (Input.GetMouseButtonDown(0))
         {
             _isDragging = true;
+            SetBreadPosition();
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (_isDragging && Input.GetMouseButtonUp(0))
         {
             _isDragging = false;
             _bread.GetComponent<Bread>().DropBread();
@@ -65,13 +62,18 @@ public class GameManager : Singleton<GameManager>
 
         if (_isDragging)
         {
-            Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 
-                Input.mousePosition.y, -Camera.main.transform.position.z));
-            
-            float breadRadius = _bread.GetComponent<CircleCollider2D>().radius;
-            if (Input.mousePosition.x - breadRadius > Screen.width / 2 - 482 && Input.mousePosition.x + breadRadius < Screen.width / 2 + 482)
-                _bread.transform.position = new Vector3(point.x, breadCreateYPosition, point.z);
+            SetBreadPosition();
         }
+    }
+
+    void SetBreadPosition()
+    {
+        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, 
+            Input.mousePosition.y, -Camera.main.transform.position.z));
+            
+        float breadRadius = _bread.GetComponent<CircleCollider2D>().radius;
+        if (Input.mousePosition.x - breadRadius > Screen.width / 2 - 482 && Input.mousePosition.x + breadRadius < Screen.width / 2 + 482)
+            _bread.transform.position = new Vector3(point.x, breadCreateYPosition, point.z);
     }
 
     IEnumerator NewBread(int level, Vector3 position, float creatTime)
@@ -82,6 +84,9 @@ public class GameManager : Singleton<GameManager>
         var bread = Instantiate(breadPrefab, breadCreatePosition);
         bread.transform.position = new Vector3(position.x, breadCreateYPosition, position.z);
         bread.gameObject.GetComponent<Bread>().SetLevel(level);
+        
+        yield return new WaitForSeconds(0.5f);
+        
         _bread = bread;
 
         yield return null;
@@ -96,8 +101,8 @@ public class GameManager : Singleton<GameManager>
         uiManager.SetGameScore(_gameScore);
     }
 
-    private void CanControl()
+    private void GameOver()
     {
-        _canControl = true;
+        Debug.Log("게임오버!");
     }
 }

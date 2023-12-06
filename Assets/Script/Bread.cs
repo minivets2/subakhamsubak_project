@@ -9,25 +9,44 @@ public class Bread : MonoBehaviour
     
     private bool _isDrop = false;
     private bool _isMerge = false;
+    private bool _isExplode;
+
+    private float _explodeTime;
+    
     private Rigidbody2D _rigidbody2D;
     private CircleCollider2D _circleCollider2D;
     private Animator _animator;
     
     public int Level => level;
     public bool IsMerge => _isMerge;
+    public bool IsDrop => _isDrop;
 
-    public delegate void DropEvent();
-    public static DropEvent dropEvent;
-    
     public delegate void LevelUpEvent(int level);
     public static LevelUpEvent levelUpEvent;
-
+    
+    public delegate void GameOverEvent();
+    public static GameOverEvent gameOverEvent;
+    
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _circleCollider2D = GetComponent<CircleCollider2D>();
         _rigidbody2D.bodyType = RigidbodyType2D.Static;
         _animator = GetComponent<Animator>();
+    }
+
+    public void Update()
+    {
+        if (_isExplode)
+        {
+            _explodeTime += Time.deltaTime;
+            
+            if (_explodeTime > 3)
+            {
+                gameOverEvent?.Invoke();
+                _isExplode = false;
+            }
+        }
     }
 
     public void SetLevel(int level)
@@ -42,10 +61,9 @@ public class Bread : MonoBehaviour
         if (!_isDrop)
         {
             _isDrop = true;
-            dropEvent?.Invoke();
         }
         
-        if ((col.gameObject.GetComponent<Bread>()))
+        if (col.gameObject.CompareTag($"Bread"))
         {
             Bread other = col.gameObject.GetComponent<Bread>();
             
@@ -117,5 +135,11 @@ public class Bread : MonoBehaviour
     public void DropBread()
     {
         _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    public void Explode(bool value)
+    {
+        _isExplode = value;
+        _animator.SetBool("isExplode", value);
     }
 }
