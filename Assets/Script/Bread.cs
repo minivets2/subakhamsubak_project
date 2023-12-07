@@ -89,6 +89,34 @@ public class Bread : MonoBehaviour
             }
         }
     }
+    
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (!_isDrop && (col.gameObject.CompareTag($"Floor") || col.gameObject.CompareTag("Bread")))
+        {
+            _isDrop = true;
+        }
+        
+        if (col.gameObject.CompareTag($"Bread"))
+        {
+            Bread other = col.gameObject.GetComponent<Bread>();
+            
+            if (other.Level == level && _isMerge == false &&
+                !other.IsMerge && level < 11)
+            {
+                float meX = transform.position.x;
+                float meY = transform.position.y;
+                float otherX = other.transform.position.x;
+                float otherY = other.transform.position.y;
+
+                if (meY < otherY || (meY == otherY && meX > otherY))
+                {
+                    other.Hide(transform.position);
+                    LevelUp();
+                }
+            }
+        }
+    }
 
     public void Hide(Vector3 targetPos)
     {

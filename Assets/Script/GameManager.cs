@@ -71,12 +71,18 @@ public class GameManager : Singleton<GameManager>
     
     public void StarGame()
     {
-        StartCoroutine(NewBread(1, Vector3.zero, 0f));
+        foreach (Transform child in breadCreatePosition)
+        {
+            Destroy(child.gameObject) ;
+        }
+        
         _maxLevel = 0;
         _gameScore = 0;
         _isGameOver = false;
         _isDragging = false;
         uiManager.InitUI();
+        
+        StartCoroutine(NewBread(1, Vector3.zero, 0.5f));
     }
 
     void SetBreadPosition()
@@ -116,6 +122,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (!_isGameOver) _isGameOver = true;
         else return;
+        
+        _destroyBreads.Clear();
 
         for (int i = 0; i < breadCreatePosition.childCount; i++)
         {
