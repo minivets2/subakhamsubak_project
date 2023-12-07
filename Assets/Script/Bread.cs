@@ -10,6 +10,7 @@ public class Bread : MonoBehaviour
     private bool _isDrop = false;
     private bool _isMerge = false;
     private bool _isExplode;
+    private bool _isExplodeAnimation;
 
     private float _explodeTime;
     
@@ -39,8 +40,14 @@ public class Bread : MonoBehaviour
         if (_isExplode)
         {
             _explodeTime += Time.deltaTime;
+
+            if (_explodeTime > 2 && !_isExplodeAnimation)
+            {
+                _animator.SetBool("isExplode", true);
+                _isExplodeAnimation = true;
+            }
             
-            if (_explodeTime > 3)
+            if (_explodeTime > 5)
             {
                 gameOverEvent?.Invoke();
                 _isExplode = false;
@@ -55,7 +62,7 @@ public class Bread : MonoBehaviour
         _animator.Play(stateName, -1, 0f);
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionStay2D(Collision2D col)
     {
         if (!_isDrop && (col.gameObject.CompareTag($"Floor") || col.gameObject.CompareTag("Bread")))
         {
@@ -138,6 +145,7 @@ public class Bread : MonoBehaviour
     public void Explode(bool value)
     {
         _isExplode = value;
-        _animator.SetBool("isExplode", value);
+        _animator.SetBool("isExplode", false);
+        _isExplodeAnimation = false;
     }
 }

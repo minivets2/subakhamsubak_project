@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -14,10 +15,12 @@ public class GameManager : Singleton<GameManager>
     
     [Header("Prefab")]
     [SerializeField] private GameObject breadPrefab;
+    [SerializeField] private ParticleSystem destroyParticle; 
 
     private GameObject _bread;
     private int _maxLevel;
     private bool _isDragging;
+    private bool _isGameOver;
     private int _gameScore;
     private List<GameObject> _destroyBreads = new List<GameObject>();
     
@@ -38,14 +41,12 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        StartCoroutine(NewBread(1, Vector3.zero, 0f));
-        _maxLevel = 0;
-        _gameScore = 0;
+        StarGame();
     }
 
     void Update()
     {
-        if (_bread == null) return;
+        if (_bread == null || _isGameOver) return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -67,6 +68,16 @@ public class GameManager : Singleton<GameManager>
             SetBreadPosition();
         }
     }
+    
+    public void StarGame()
+    {
+        StartCoroutine(NewBread(1, Vector3.zero, 0f));
+        _maxLevel = 0;
+        _gameScore = 0;
+        _isGameOver = false;
+        _isDragging = false;
+        uiManager.InitUI();
+    }
 
     void SetBreadPosition()
     {
@@ -87,9 +98,6 @@ public class GameManager : Singleton<GameManager>
         var bread = Instantiate(breadPrefab, breadCreatePosition);
         bread.transform.position = new Vector3(position.x, breadCreateYPosition, position.z);
         bread.gameObject.GetComponent<Bread>().SetLevel(level);
-        
-        yield return new WaitForSeconds(0.5f);
-        
         _bread = bread;
 
         yield return null;
@@ -106,6 +114,9 @@ public class GameManager : Singleton<GameManager>
 
     private void GetAllBread()
     {
+        if (!_isGameOver) _isGameOver = true;
+        else return;
+
         for (int i = 0; i < breadCreatePosition.childCount; i++)
         {
             if (breadCreatePosition.GetChild(i).gameObject.activeSelf)
@@ -113,7 +124,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         _destroyBreads.OrderBy(x => x.transform.position.y);
-
+        _destroyBreads.Reverse();
         StartCoroutine(nameof(DestroyBread));
     }
 
@@ -121,9 +132,15 @@ public class GameManager : Singleton<GameManager>
     {
         for (int i = 0; i < _destroyBreads.Count; i++)
         {
+            var particle = Instantiate(destroyParticle, breadCreatePosition);
+            particle.gameObject.transform.localPosition = _destroyBreads[i].transform.localPosition;
             Destroy(_destroyBreads[i]);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.15f);
         }
+
+        yield return new WaitForSeconds(1f);
+        
+        uiManager.ShowGameOverPopup();
     }
     
     
