@@ -90,10 +90,10 @@ public class Bread : MonoBehaviour
         _rigidbody2D.simulated = false;
         _circleCollider2D.enabled = false;
 
-        StartCoroutine(HideRoutine(targetPos));
+        HideRoutine(targetPos);
     }
 
-    IEnumerator HideRoutine(Vector3 targetPos)
+    void HideRoutine(Vector3 targetPos)
     {
         int frameCount = 0;
 
@@ -101,7 +101,6 @@ public class Bread : MonoBehaviour
         {
             frameCount++;
             transform.position = Vector3.Lerp(transform.position, targetPos, 0.5f);
-            yield return null;
         }
 
         _isMerge = false;
