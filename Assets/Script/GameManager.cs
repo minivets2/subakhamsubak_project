@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -21,6 +22,7 @@ public class GameManager : Singleton<GameManager>
     private int _maxLevel;
     private bool _isDragging;
     private bool _isGameOver;
+    private bool _isUIOpen;
     private int _gameScore;
     private List<GameObject> _destroyBreads = new List<GameObject>();
     
@@ -46,7 +48,15 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        if (_bread == null || _isGameOver) return;
+        if (_bread == null || _isGameOver || _isUIOpen) return;
+        
+        if (EventSystem.current.currentSelectedGameObject != null )
+        {
+            if (EventSystem.current.currentSelectedGameObject.CompareTag("UI"))
+            {
+                return;
+            }
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -150,6 +160,10 @@ public class GameManager : Singleton<GameManager>
         
         uiManager.ShowGameOverPopup();
     }
-    
-    
+
+    public void SetIsUIOpen(bool value)
+    {
+        _isUIOpen = value;
+    }
+
 }

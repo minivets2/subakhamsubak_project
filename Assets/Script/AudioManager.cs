@@ -39,4 +39,14 @@ public class AudioManager : Singleton<AudioManager>
             sfxSource.PlayOneShot(s.Clip);
         }
     }
+
+    public void ChangeMusicVolume(float value)
+    {
+        musicSource.volume = value;
+    }
+    
+    public void ChangeSfxVolume(float value)
+    {
+        sfxSource.volume = value;
+    }
 }
