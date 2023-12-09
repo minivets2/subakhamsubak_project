@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using BackEnd;
 using LitJson;
 using UnityEngine;
+using BackEnd.GlobalSupport;
 
 public class UserInfo : MonoBehaviour
 {
@@ -25,7 +23,6 @@ public class UserInfo : MonoBehaviour
                     JsonData json = callback.GetReturnValuetoJSON()["row"];
 
                     data.gamerId = json["gamerId"].ToString();
-                    data.countryCode = json["countryCode"]?.ToString();
                     data.nickname = json["nickname"]?.ToString();
                     data.inDate = json["inDate"].ToString();
                     data.emailForFindPassword = json["emailForFindPassword"]?.ToString();
@@ -62,7 +59,7 @@ public class UserInfoData
     public void Reset()
     {
         gamerId = "Offline";
-        countryCode = "Unknown";
+        countryCode = "NONE";
         nickname = "Noname";
         inDate = string.Empty;
         emailForFindPassword = string.Empty;
