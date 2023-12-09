@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LoginBase : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] private TextMeshProUGUI textMessage;
 
     protected void ResetUI(params Image[] images)
     {
-        textMeshProUGUI.text = string.Empty;
+        textMessage.text = string.Empty;
 
         for (int i = 0; i < images.Length; i++)
         {
@@ -20,12 +21,12 @@ public class LoginBase : MonoBehaviour
 
     protected void SetMessage(string msg)
     {
-        textMeshProUGUI.text = msg;
+        textMessage.text = msg;
     }
 
     protected void GuideForIncorrectlyEnterData(Image image, string msg)
     {
-        textMeshProUGUI.text = msg;
+        textMessage.text = msg;
         image.color = Color.red;
     }
 

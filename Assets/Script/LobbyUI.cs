@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LobbyUIManager : MonoBehaviour
+public class LobbyUI : MonoBehaviour
 {
     [SerializeField] private GameObject creditPopup;
 
