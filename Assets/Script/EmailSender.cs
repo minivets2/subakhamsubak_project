@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class EmailSender : MonoBehaviour
 {
@@ -20,6 +21,6 @@ public class EmailSender : MonoBehaviour
 
     private string EscapeURL(string url)
     {
-        return WWW.EscapeURL(url).Replace("+", "%20");
+        return UnityWebRequest.EscapeURL(url).Replace("+", "%20");
     }
 }
