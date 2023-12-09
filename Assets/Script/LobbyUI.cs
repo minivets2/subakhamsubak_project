@@ -20,7 +20,7 @@ public class LobbyUI : MonoBehaviour
 
     public void StartButtonClick()
     {
-        SceneManager.LoadScene("Main");
+        Utils.LoadScene(SceneNames.Main);
     }
 
     public void ShowCreditPopup()

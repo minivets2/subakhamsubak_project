@@ -68,6 +68,6 @@ public class UIManager : MonoBehaviour
 
     public void ExitButtonClick()
     {
-        SceneManager.LoadScene("Lobby");
+        Utils.LoadScene(SceneNames.Lobby);
     }
 }

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using BackEnd;
 using TMPro;
 using UnityEngine;
@@ -37,6 +35,7 @@ public class Login : LoginBase
             if (callback.IsSuccess())
             {
                 SetMessage($"{inputFieldID.text}님 환영합니다.");
+                Utils.LoadScene(SceneNames.Lobby);
             }
             else
             {

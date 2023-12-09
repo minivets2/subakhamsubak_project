@@ -3,7 +3,9 @@ using UnityEngine.SceneManagement;
 public enum SceneNames
 {
     Loading=0,
+    Login,
     Lobby,
+    Main,
 }
 
 public class Utils
