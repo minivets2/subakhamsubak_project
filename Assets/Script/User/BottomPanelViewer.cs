@@ -18,6 +18,13 @@ public class BottomPanelViewer : MonoBehaviour
 
     public void UpdateFlag()
     {
+        string country = Backend.LocationProperties.Country.Replace(" ", string.Empty);
+        countryCode = (CountryCode)System.Enum.Parse(typeof(CountryCode), country);
         Backend.BMember.UpdateCountryCode(countryCode);
+        
+        BackendReturnObject bro = Backend.BMember.GetMyCountryCode();
+        string countryByString = bro.GetReturnValuetoJSON()["country"]["S"].ToString();
+        
+        flagImage.sprite = Resources.Load<Sprite>(countryByString);
     }
 }
