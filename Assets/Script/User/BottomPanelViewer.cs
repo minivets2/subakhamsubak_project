@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,13 @@ public class BottomPanelViewer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textNickname;
     [SerializeField] private Image flagImage;
-    [SerializeField] private CountryCode countryCode;
-        
+    [SerializeField] private TextMeshProUGUI textBestScore;
+
+    private void Awake()
+    {
+        BackendGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
+    }
+
     public void UpdateNickname()
     {
         textNickname.text = UserInfo.Data.nickname == null ? 
@@ -19,12 +25,17 @@ public class BottomPanelViewer : MonoBehaviour
     public void UpdateFlag()
     {
         string country = Backend.LocationProperties.Country.Replace(" ", string.Empty);
-        countryCode = (CountryCode)System.Enum.Parse(typeof(CountryCode), country);
+        CountryCode countryCode = (CountryCode)System.Enum.Parse(typeof(CountryCode), country);
         Backend.BMember.UpdateCountryCode(countryCode);
         
         BackendReturnObject bro = Backend.BMember.GetMyCountryCode();
         string countryByString = bro.GetReturnValuetoJSON()["country"]["S"].ToString();
         
         flagImage.sprite = Resources.Load<Sprite>(countryByString);
+    }
+
+    public void UpdateGameData()
+    {
+        textBestScore.text = $"{BackendGameData.Instance.UserGameData.bestScore}";
     }
 }

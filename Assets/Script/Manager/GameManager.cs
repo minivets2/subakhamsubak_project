@@ -16,7 +16,10 @@ public class GameManager : Singleton<GameManager>
     
     [Header("Prefab")]
     [SerializeField] private GameObject breadPrefab;
-    [SerializeField] private ParticleSystem destroyParticle; 
+    [SerializeField] private ParticleSystem destroyParticle;
+
+    [Header("Rank")] 
+    [SerializeField] private RankRegister rank;
 
     private GameObject _bread;
     private int _maxLevel;
@@ -159,6 +162,8 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(1f);
         
         uiManager.ShowGameOverPopup();
+        
+        rank.Process(_gameScore);
     }
 
     public void SetIsUIOpen(bool value)
