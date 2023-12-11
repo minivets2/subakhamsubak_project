@@ -5,7 +5,6 @@ public class RankRegister : MonoBehaviour
 {
     public void Process(int newScore)
     {
-        //UpdataRankData(newScore);
         UpdataMyBestRankData(newScore);
     }
 
@@ -25,7 +24,7 @@ public class RankRegister : MonoBehaviour
 
             if (callback.FlattenRows().Count > 0)
             {
-                rowInData = callback.FlattenRows()[0]["inData"].ToString();
+                rowInData = callback.FlattenRows()[0]["inDate"].ToString();
             }
             else
             {
