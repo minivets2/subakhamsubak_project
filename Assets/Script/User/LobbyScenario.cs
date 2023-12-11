@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class LobbyScenario : MonoBehaviour
@@ -7,5 +8,10 @@ public class LobbyScenario : MonoBehaviour
     private void Awake()
     {
         user.GetUserInfoFromBackend();
+    }
+
+    private void Start()
+    {
+        BackendGameData.Instance.GameDataLoad();
     }
 }

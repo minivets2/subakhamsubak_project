@@ -58,6 +58,8 @@ public class RegisterAccount : LoginBase
                     {
                         SetMessage($"계정 생성 성공. {inputFieldID.text}님 환영합니다.");
                         
+                        BackendGameData.Instance.GameDataInsert();
+                        
                         Utils.LoadScene(SceneNames.Lobby);
                     }
                 });
