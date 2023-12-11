@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using BackEnd;
 using UnityEngine;
 
@@ -8,7 +5,7 @@ public class RankRegister : MonoBehaviour
 {
     public void Process(int newScore)
     {
-        UpdataRankData(newScore);
+        //UpdataRankData(newScore);
         UpdataMyBestRankData(newScore);
     }
 
