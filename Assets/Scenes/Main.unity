@@ -3246,6 +3246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1448122419}
   - component: {fileID: 1448122418}
+  - component: {fileID: 1448122420}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3270,6 +3271,7 @@ MonoBehaviour:
   breadCreatePosition: {fileID: 990919620}
   breadPrefab: {fileID: 7487882057047236555, guid: 2fc0a39e009ab0049baea14062318e96, type: 3}
   destroyParticle: {fileID: 5737477090428699486, guid: b043eb2c9b66be142af0d8944634c462, type: 3}
+  rank: {fileID: 1448122420}
 --- !u!4 &1448122419
 Transform:
   m_ObjectHideFlags: 0
@@ -3285,6 +3287,18 @@ Transform:
   m_Father: {fileID: 3424909420138958399}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1448122420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448122417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4348d4142151184bb8f4a156466e6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1482950483
 GameObject:
   m_ObjectHideFlags: 0
