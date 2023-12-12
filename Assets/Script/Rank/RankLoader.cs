@@ -24,7 +24,10 @@ public class RankLoader : MonoBehaviour
             GameObject clone = Instantiate(rankDataPrefab, rankDataParent);
             _rankDataList.Add(clone.GetComponent<RankData>());
         }
-        
+    }
+
+    private void OnEnable()
+    {
         scrollbar.value = 1;
         GetRankList();
         GetMyRank();
@@ -60,7 +63,7 @@ public class RankLoader : MonoBehaviour
                             _rankDataList[i].Rank = int.Parse(rankDataJson[i]["rank"].ToString());
                             _rankDataList[i].Score = int.Parse(rankDataJson[i]["score"].ToString());
                             _rankDataList[i].Nickname = rankDataJson[i].ContainsKey("nickname") == true ?
-                                rankDataJson[i]["nickName"]?.ToString() : UserInfo.Data.gamerId;
+                                rankDataJson[i]["nickname"]?.ToString() : UserInfo.Data.gamerId;
                             _rankDataList[i].CountryCode = rankDataJson[i]["country"].ToString();
                         }
 

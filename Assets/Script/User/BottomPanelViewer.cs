@@ -12,7 +12,7 @@ public class BottomPanelViewer : MonoBehaviour
 
     private void Awake()
     {
-        BackendGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
+        //BackendGameData.Instance.onGameDataLoadEvent.AddListener(UpdateGameData);
     }
 
     public void UpdateNickname()
@@ -32,6 +32,6 @@ public class BottomPanelViewer : MonoBehaviour
 
     public void UpdateGameData()
     {
-        textBestScore.text = $"{BackendGameData.Instance.UserGameData.bestScore}";
+        //textBestScore.text = $"{BackendGameData.Instance.UserGameData.bestScore}";
     }
 }
