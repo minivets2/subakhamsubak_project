@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using BackEnd;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -162,7 +163,10 @@ public class GameManager : Singleton<GameManager>
         
         uiManager.ShowGameOverPopup();
         
-        rank.Process(_gameScore);
+        BackendReturnObject bro = Backend.BMember.GetMyCountryCode();
+        string country = bro.GetReturnValuetoJSON()["country"]["S"].ToString();
+        
+        rank.Process(_gameScore, country);
     }
 
     public void SetIsUIOpen(bool value)

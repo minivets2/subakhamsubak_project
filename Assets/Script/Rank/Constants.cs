@@ -2,5 +2,6 @@
 public static class Constants
 {
     public static readonly string USER_DATA_TABLE = "USER_DATA";
-    public static readonly string RANK_UUID = "72222e50-9837-11ee-946f-2fcef5c6a4cb";
+    public static readonly string RANK_UUID = "83d754c0-98d4-11ee-b29f-d3328b21e848";
+    public static readonly int MAX_RANK_LIST = 20;
 }

@@ -19,6 +19,7 @@ public class BackendGameData : Singleton<BackendGameData>
 
         Param param = new Param()
         {
+            {"country", userGameData.country},
             {"bestScore", userGameData.bestScore}
         };
 
@@ -57,6 +58,7 @@ public class BackendGameData : Singleton<BackendGameData>
                     {
                         gameDataRowInData = gameDataJson[0]["inData"].ToString();
 
+                        userGameData.country = gameDataJson[0]["country"].ToString();
                         userGameData.bestScore = int.Parse(gameDataJson[0]["bestScore"].ToString());
 
                         onGameDataLoadEvent?.Invoke();
@@ -89,6 +91,7 @@ public class BackendGameData : Singleton<BackendGameData>
 
         Param param = new Param()
         {
+            {"country", userGameData.country},
             {"bestScore", userGameData.bestScore}
         };
 

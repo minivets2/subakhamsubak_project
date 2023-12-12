@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class RankRegister : MonoBehaviour
 {
-    public void Process(int newScore)
+    public void Process(int newScore, string country)
     {
-        UpdataMyBestRankData(newScore);
+        UpdataMyBestRankData(newScore, country);
     }
 
-    private void UpdataRankData(int newScore)
+    private void UpdateRankData(int newScore, string country)
     {
         string rowInData = string.Empty;
 
@@ -34,6 +34,7 @@ public class RankRegister : MonoBehaviour
 
             Param param = new Param()
             {
+                { "country", country},
                 { "bestScore", newScore }
             };
 
@@ -52,7 +53,7 @@ public class RankRegister : MonoBehaviour
         });
     }
 
-    private void UpdataMyBestRankData(int newScore)
+    private void UpdataMyBestRankData(int newScore, string country)
     {
         Backend.URank.User.GetMyRank(Constants.RANK_UUID, callback =>
         {
@@ -72,7 +73,7 @@ public class RankRegister : MonoBehaviour
 
                         if (newScore > bestScore)
                         {
-                            UpdataRankData(newScore);
+                            UpdateRankData(newScore, country);
 
                             Debug.Log($"최고 점수 갱신 {bestScore} -> {newScore}");
                         }
@@ -87,7 +88,7 @@ public class RankRegister : MonoBehaviour
             {
                 if (callback.GetMessage().Contains("userRank"))
                 {
-                    UpdataRankData(newScore);
+                    UpdateRankData(newScore, country);
                     
                     Debug.Log($"새로운 랭킹 데이터 생성 및 등록 : {callback}");
                 }
