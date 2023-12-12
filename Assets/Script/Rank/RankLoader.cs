@@ -24,14 +24,9 @@ public class RankLoader : MonoBehaviour
             GameObject clone = Instantiate(rankDataPrefab, rankDataParent);
             _rankDataList.Add(clone.GetComponent<RankData>());
         }
-    }
-
-    private void OnEnable()
-    {
+        
         scrollbar.value = 1;
-
         GetRankList();
-
         GetMyRank();
     }
 

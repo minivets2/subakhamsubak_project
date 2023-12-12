@@ -40,6 +40,13 @@ public class Nickname : LoginBase
         {
             btnUpdateNickname.interactable = true;
 
+            if (inputFieldNickname.text.Length >= 12)
+            {
+                string message = "닉네임이 12글자 이상입니다.";
+                GuideForIncorrectlyEnterData(imageNickname, message);
+                return;
+            }
+
             if (callback.IsSuccess())
             {
                 SetMessage($"{inputFieldNickname.text}(으)로 닉네임이 변경되었습니다.");

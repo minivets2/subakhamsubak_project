@@ -56,7 +56,7 @@ public class BackendGameData : Singleton<BackendGameData>
                     }
                     else
                     {
-                        gameDataRowInData = gameDataJson[0]["inData"].ToString();
+                        gameDataRowInData = gameDataJson[0]["inDate"].ToString();
 
                         userGameData.country = gameDataJson[0]["country"].ToString();
                         userGameData.bestScore = int.Parse(gameDataJson[0]["bestScore"].ToString());
