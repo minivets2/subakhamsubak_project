@@ -3,6 +3,48 @@ using UnityEngine;
 
 public class RankRegister : MonoBehaviour
 {
+    [SerializeField] private RankType rankType;
+    
+    public string GetRankUUID()
+    {
+        string uuid = Constants.RANK_UUID;
+        
+        if (rankType == RankType.Daily)
+        {
+            uuid = Constants.DAYLY_RANK_UUID;
+        }
+        else if (rankType == RankType.Weekly)
+        {
+            uuid = Constants.WEEKLY_RANK_UUID;
+        }
+        else if (rankType == RankType.Monthly)
+        {
+            uuid = Constants.MONTHLY_RANK_UUID;
+        }
+
+        return uuid;
+    }
+    
+    public string GetRankType()
+    {
+        string _rankType = "bestScore";
+        
+        if (rankType == RankType.Daily)
+        {
+            _rankType = "bestDailyScore";
+        }
+        else if (rankType == RankType.Weekly)
+        {
+            _rankType = "bestWeeklyScore";
+        }
+        else if (rankType == RankType.Monthly)
+        {
+            _rankType = "bestMonthlyScore";
+        }
+
+        return _rankType;
+    }
+    
     public void Process(int newScore, string country)
     {
         UpdataMyBestRankData(newScore, country);
@@ -32,13 +74,15 @@ public class RankRegister : MonoBehaviour
                 return;
             }
 
+            
+            
             Param param = new Param()
             {
                 { "country", country},
-                { "bestScore", newScore }
+                {GetRankType(), newScore}
             };
 
-            Backend.URank.User.UpdateUserScore(Constants.RANK_UUID, Constants.USER_DATA_TABLE, rowInData, param,
+            Backend.URank.User.UpdateUserScore(GetRankUUID(), Constants.USER_DATA_TABLE, rowInData, param,
                 callback =>
                 {
                     if (callback.IsSuccess())
@@ -55,7 +99,7 @@ public class RankRegister : MonoBehaviour
 
     private void UpdataMyBestRankData(int newScore, string country)
     {
-        Backend.URank.User.GetMyRank(Constants.RANK_UUID, callback =>
+        Backend.URank.User.GetMyRank(GetRankUUID(), callback =>
         {
             if (callback.IsSuccess())
             {

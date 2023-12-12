@@ -338,7 +338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b6e55e17a58f1945a3773cb500c1af2, type: 2}
   m_sharedMaterial: {fileID: -707679429332392818, guid: 9b6e55e17a58f1945a3773cb500c1af2, type: 2}
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: dsaddsad
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b6e55e17a58f1945a3773cb500c1af2, type: 2}
   m_sharedMaterial: {fileID: -707679429332392818, guid: 9b6e55e17a58f1945a3773cb500c1af2, type: 2}
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.85
+  m_fontSize: 40
   m_fontSizeBase: 40.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: NICKNAME
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b6e55e17a58f1945a3773cb500c1af2, type: 2}
   m_sharedMaterial: {fileID: -707679429332392818, guid: 9b6e55e17a58f1945a3773cb500c1af2, type: 2}
@@ -771,7 +771,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.35
+  m_fontSize: 40
   m_fontSizeBase: 40.8
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 44eedb35077e1ea4b904e95b3f855bd7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

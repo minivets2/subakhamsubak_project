@@ -12,6 +12,7 @@ public class RankLoader : MonoBehaviour
     [SerializeField] private Scrollbar scrollbar;
     [SerializeField] private Transform rankDataParent;
     [SerializeField] private RankData myRankData;
+    [SerializeField] private RankType rankType;
 
     private List<RankData> _rankDataList;
 
@@ -32,10 +33,34 @@ public class RankLoader : MonoBehaviour
         GetRankList();
         GetMyRank();
     }
+    
+    public string GetRankUUID()
+    {
+        string uuid = "";
+        
+        if (rankType == RankType.Daily)
+        {
+            uuid = Constants.DAYLY_RANK_UUID;
+        }
+        else if (rankType == RankType.Weekly)
+        {
+            uuid = Constants.WEEKLY_RANK_UUID;
+        }
+        else if (rankType == RankType.Monthly)
+        {
+            uuid = Constants.MONTHLY_RANK_UUID;
+        }
+        else
+        {
+            uuid = Constants.RANK_UUID;
+        }
+
+        return uuid;
+    }
 
     private void GetRankList()
     {
-        Backend.URank.User.GetRankList(Constants.RANK_UUID, Constants.MAX_RANK_LIST, callback =>
+        Backend.URank.User.GetRankList(GetRankUUID(), Constants.MAX_RANK_LIST, callback =>
         {
             if (callback.IsSuccess())
             {
@@ -92,7 +117,7 @@ public class RankLoader : MonoBehaviour
 
     private void GetMyRank()
     {
-        Backend.URank.User.GetMyRank(Constants.RANK_UUID, callback =>
+        Backend.URank.User.GetMyRank(GetRankUUID(), callback =>
         {
             string nickName = UserInfo.Data.nickname == null ? UserInfo.Data.gamerId : UserInfo.Data.nickname;
 

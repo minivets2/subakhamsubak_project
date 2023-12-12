@@ -20,6 +20,9 @@ public class BackendGameData : Singleton<BackendGameData>
         Param param = new Param()
         {
             {"country", userGameData.country},
+            {"bestDailyScore", userGameData.bestDailyScore},
+            {"bestWeeklyScore", userGameData.bestWeeklyScore},
+            {"bestMonthlyScore", userGameData.bestMonthlyScore},
             {"bestScore", userGameData.bestScore}
         };
 
@@ -59,6 +62,10 @@ public class BackendGameData : Singleton<BackendGameData>
                         gameDataRowInData = gameDataJson[0]["inDate"].ToString();
 
                         userGameData.country = gameDataJson[0]["country"].ToString();
+                        
+                        userGameData.bestDailyScore = int.Parse(gameDataJson[0]["bestDailyScore"].ToString());
+                        userGameData.bestWeeklyScore = int.Parse(gameDataJson[0]["bestWeeklyScore"].ToString());
+                        userGameData.bestMonthlyScore = int.Parse(gameDataJson[0]["bestMonthlyScore"].ToString());
                         userGameData.bestScore = int.Parse(gameDataJson[0]["bestScore"].ToString());
 
                         onGameDataLoadEvent?.Invoke();
@@ -92,6 +99,9 @@ public class BackendGameData : Singleton<BackendGameData>
         Param param = new Param()
         {
             {"country", userGameData.country},
+            {"bestDailyScore", userGameData.bestDailyScore},
+            {"bestWeeklyScore", userGameData.bestWeeklyScore},
+            {"bestMonthlyScore", userGameData.bestMonthlyScore},
             {"bestScore", userGameData.bestScore}
         };
 

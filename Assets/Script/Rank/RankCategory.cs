@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum RankType
 {
@@ -15,12 +16,15 @@ public class RankCategory : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI rankCategory;
     [SerializeField] private List<GameObject> rankPanels;
+    [SerializeField] private Button leftButton;
+    [SerializeField] private Button rightButton;
 
     private int _index;
 
     public void InitRankPanel()
     {
         _index = 0;
+        leftButton.interactable = false;
         SetPanel();
         gameObject.GetComponent<RectTransform>().SetAsLastSibling();
     }
@@ -28,20 +32,30 @@ public class RankCategory : MonoBehaviour
     public void OnClickRightButton()
     {
         _index++;
+        leftButton.interactable = true;
+        rightButton.interactable = true;
 
         if (_index == rankPanels.Count)
+        {
+            rightButton.interactable = false;
             _index--;
-        
+        }
+
         SetPanel();
     }
     
     public void OnClickLeftButton()
     {
         _index--;
-        
+        leftButton.interactable = true;
+        rightButton.interactable = true;
+
         if (_index == -1)
+        {
+            leftButton.interactable = false;
             _index = 0;
-        
+        }
+
         SetPanel();
     }
 
