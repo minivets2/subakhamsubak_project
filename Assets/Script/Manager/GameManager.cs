@@ -18,7 +18,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject breadPrefab;
     [SerializeField] private ParticleSystem destroyParticle;
 
-    [Header("Rank")] 
+    [Header("Rank")]
+    [SerializeField] private RankRegister dailyRank;
+    [SerializeField] private RankRegister weeklyRank;
+    [SerializeField] private RankRegister monthlyRank;
     [SerializeField] private RankRegister rank;
 
     private GameObject _bread;
@@ -166,6 +169,9 @@ public class GameManager : Singleton<GameManager>
         BackendReturnObject bro = Backend.BMember.GetMyCountryCode();
         string country = bro.GetReturnValuetoJSON()["country"]["S"].ToString();
         
+        dailyRank.Process(_gameScore, country);
+        weeklyRank.Process(_gameScore, country);
+        monthlyRank.Process(_gameScore, country);
         rank.Process(_gameScore, country);
     }
 

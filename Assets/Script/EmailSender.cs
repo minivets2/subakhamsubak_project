@@ -11,6 +11,8 @@ public class EmailSender : MonoBehaviour
         (
             "이 곳에 내용을 작성해주세요.\n\n\n\n" +
             "________\n\n" +
+            "User ID : " + UserInfo.Data.gamerId + "\n" +
+            "User Nickname : " + UserInfo.Data.nickname + "\n" +
             "Device Model : " + SystemInfo.deviceModel + "\n" +
             "Device OS : " + SystemInfo.operatingSystem + "\n\n" +
             "________"
