@@ -39,9 +39,6 @@ public class Bread : MonoBehaviour
     {
         if (_isExplode)
         {
-            gameOverEvent?.Invoke();
-            _isExplode = false;
-            
             _explodeTime += Time.deltaTime;
 
             if (_explodeTime > 2 && !_isExplodeAnimation)
