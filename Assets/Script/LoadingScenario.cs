@@ -14,10 +14,6 @@ public class LoadingScenario : MonoBehaviour
     {
         Application.runInBackground = true;
 
-        int width = Screen.width;
-        int height = (int)(Screen.width * 16 / 9);
-        Screen.SetResolution(width, height, true);
-
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         
         progress.Play(OnAfterProgress);
