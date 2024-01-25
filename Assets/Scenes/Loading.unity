@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14976478, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.5372549, g: 0.34901962, b: 0.14509805, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -803,6 +803,7 @@ GameObject:
   - component: {fileID: 1555668599}
   - component: {fileID: 1555668601}
   - component: {fileID: 1555668600}
+  - component: {fileID: 1555668602}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -868,6 +869,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555668598}
   m_CullTransparentMesh: 1
+--- !u!111 &1555668602
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555668598}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d8f1935ed100c6b47b6561f9189beb62, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: d8f1935ed100c6b47b6561f9189beb62, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1572841182
 GameObject:
   m_ObjectHideFlags: 0
